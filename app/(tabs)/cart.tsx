@@ -8,9 +8,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const CartScreen = () => {
 
   interface ShopItem {
-      imageUrl: any,
+      image: string,
       name: string,
-      desc: string,
+      description: string,
       price: number,
       id: number
     }
@@ -66,10 +66,10 @@ const CartScreen = () => {
               data={cart}
               renderItem={({ item }) => (
                 <View style={styles.cartItem}>
-                  <Image source={item.imageUrl} style={{ width: 100, height: 150 }} />
+                  <Image source={require(item.image)} style={{ width: 100, height: 150 }} />
                   <View style={styles.cartContent}>
                     <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.name}</Text>
-                    <Text style={{fontSize: 18}}>{item.desc}</Text>
+                    <Text style={{fontSize: 18}}>{item.description}</Text>
                     <Text style={{color: '#dc8460', fontSize: 20}}>${item.price}</Text>
                     <TouchableOpacity onPress={() => removeFromCart(item.id)}>
                       <Image style={styles.removeButton} source={require('../../assets/remove.png')} />

@@ -4,13 +4,14 @@ import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import axios from "axios";
 
 export default function Index() {
 
   interface ShopItem {
-    imageUrl: any,
-    name: string,
-    desc: string,
+    image: string,
+    title: string,
+    description: string,
     price: number,
     id: number
   }
@@ -22,54 +23,9 @@ export default function Index() {
     useCallback(() => {
       console.log('Hello, I am focused!');
       fetchShop();
-      fetchCart();
+      // fetchCart();
     }, [])
   );
-
-  const initialShopList: ShopItem[] = [
-    {
-      id: 1,
-      imageUrl: require('@/assets/images/dress1.png'),
-      name: 'Church Wear',
-      desc: 'reversible angora cardigan',
-      price: 120
-    },
-    {
-      id: 2,
-      imageUrl: require('@/assets/images/dress2.png'),
-      name: 'Lamerei',
-      desc: 'reversible angora cardigan',
-      price: 120
-    },
-    {
-      id: 3,
-      imageUrl: require('@/assets/images/dress3.png'),
-      name: '21WN',
-      desc: 'reversible angora cardigan',
-      price: 120,
-    },
-    {
-      id: 4,
-      imageUrl: require('@/assets/images/dress4.png'),
-      name: 'Lopo',
-      desc: 'reversible angora cardigan',
-      price: 120,
-    },
-    {
-      id: 5,
-      imageUrl: require('@/assets/images/dress5.png'),
-      name: '21WN',
-      desc: 'reversible angora cardigan',
-      price: 120,
-    },
-    {
-      id: 6,
-      imageUrl: require('@/assets/images/dress6.png'),
-      name: 'lamer',
-      desc: 'reversible angora cardigan',
-      price: 120,
-    },
-  ]
 
   const fetchCart = async () => {
     try {
@@ -86,23 +42,17 @@ export default function Index() {
 
   const fetchShop = async () => {
     try {
-      const data = await AsyncStorage.getItem('shop');
-      if (data !== null) {        
-        setShop(JSON.parse(data));
-      } else {
-        setShop(initialShopList);
-        saveShopToStore(initialShopList); // Save initial shop list to AsyncStorage
+      
+      await AsyncStorage.removeItem('shop')
+      await AsyncStorage.removeItem('cart')
+      const response = await axios.get('https://fakestoreapi.com/products');
+      console.log(response.data);
+      
+      if (response.data !== null) {        
+        setShop(response.data);
       }
     } catch (err: any) {
       console.error('Error fetching shop:', err.message);
-    }
-  }
-
-  const saveShopToStore = async (data: ShopItem[]) => {
-    try {
-      await AsyncStorage.setItem('shop', JSON.stringify(data));
-    } catch (err: any) {
-      console.error('Error saving shop:', err.message);
     }
   }
 
@@ -140,9 +90,9 @@ export default function Index() {
             columnWrapperStyle={{justifyContent: 'space-between'}}
             renderItem={({ item }) => (
               <ShoppingCard
-                imageUrl={item.imageUrl}
-                name={item.name}
-                desc={item.desc}
+                image={item.image}
+                title={item.title}
+                description={(item.description).substring(0, 50)}
                 price={item.price}
                 onPress={() => addToCart(item)}
                 inCart={cart.some(cartItem => cartItem.id === item.id)}

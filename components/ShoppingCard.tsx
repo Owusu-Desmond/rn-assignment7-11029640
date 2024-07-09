@@ -3,18 +3,18 @@ import { Image, ImageBackground, StyleSheet, Text, TouchableHighlight, Touchable
 import { Icon } from "./Icon"
 
 type ShoppingCardProps = {
-    imageUrl: any,
-    name: string,
-    desc: string,
+    image: any,
+    title: string,
+    description: string,
     price: number,
     onPress: () => void,
     inCart: boolean
   }
 
-  const ShoppingCard = ({ imageUrl, name, desc, price, onPress, inCart }: ShoppingCardProps) => {
+  const ShoppingCard = ({ image, title, description, price, onPress, inCart }: ShoppingCardProps) => {
     return (
         <View style={styles.cardContainer}>
-            <ImageBackground style={styles.imageContainer} source={imageUrl}>
+            <ImageBackground style={styles.imageContainer} source={require(image)}>
                 <TouchableOpacity
                     style={styles.addButton}
                     onPress={onPress}
@@ -23,8 +23,8 @@ type ShoppingCardProps = {
                     <Icon color={inCart ? 'green' : 'black'} name={inCart ? 'checkmark-circle-outline' : 'add-circle-outline'} size={28} />
                 </TouchableOpacity>
             </ImageBackground>
-            <Text style={styles.name}>{name}</Text>
-            <Text style={styles.desc}>{desc}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.description}>{description}</Text>
             <Text style={styles.price}>${price}</Text>
         </View>
     )
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
     addButton: {
         margin: 10
     },
-    name: {
+    title: {
         fontSize: 18,
         fontWeight: '400'
     },
-    desc: {
+    description: {
         fontSize: 13,
         color: 'gray'
     },
