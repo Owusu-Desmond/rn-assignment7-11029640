@@ -21,15 +21,15 @@ export default function Index() {
 
   useFocusEffect(
     useCallback(() => {
-      console.log('Hello, I am focused!');
       fetchShop();
-      // fetchCart();
+      fetchCart();
     }, [])
   );
 
   const fetchCart = async () => {
     try {
       const data = await AsyncStorage.getItem('cart');
+
       if (data !== null) {
         setCart(JSON.parse(data));
       } else {
@@ -46,7 +46,7 @@ export default function Index() {
       await AsyncStorage.removeItem('shop')
       await AsyncStorage.removeItem('cart')
       const response = await axios.get('https://fakestoreapi.com/products');
-      console.log(response.data);
+      console.log(JSON.stringify(response.data));
       
       if (response.data !== null) {        
         setShop(response.data);
@@ -90,15 +90,15 @@ export default function Index() {
             columnWrapperStyle={{justifyContent: 'space-between'}}
             renderItem={({ item }) => (
               <ShoppingCard
-                image={item.image}
-                title={item.title}
+                image={item["image"]}
+                title={item["title"]}
                 description={(item.description).substring(0, 50)}
-                price={item.price}
+                price={item["price"]}
                 onPress={() => addToCart(item)}
-                inCart={cart.some(cartItem => cartItem.id === item.id)}
+                inCart={cart.some(cartItem => cartItem.id === item["id"])}
               />
             )}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item["id"].toString()}
           />
         </View>
       {/* </ScrollView> */}

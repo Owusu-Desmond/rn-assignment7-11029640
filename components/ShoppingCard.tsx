@@ -12,9 +12,10 @@ type ShoppingCardProps = {
   }
 
   const ShoppingCard = ({ image, title, description, price, onPress, inCart }: ShoppingCardProps) => {
+    
     return (
         <View style={styles.cardContainer}>
-            <ImageBackground style={styles.imageContainer} source={require(image)}>
+            <ImageBackground style={styles.imageContainer} resizeMode="contain" src={image}>
                 <TouchableOpacity
                     style={styles.addButton}
                     onPress={onPress}
@@ -23,9 +24,12 @@ type ShoppingCardProps = {
                     <Icon color={inCart ? 'green' : 'black'} name={inCart ? 'checkmark-circle-outline' : 'add-circle-outline'} size={28} />
                 </TouchableOpacity>
             </ImageBackground>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.description}>{description}</Text>
-            <Text style={styles.price}>${price}</Text>
+            <View style={{width: 155}}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.description}>{description}</Text>
+                <Text style={styles.price}>${price}</Text>
+            </View>
+            
         </View>
     )
 }
@@ -42,13 +46,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width: 155,
         height: 200,
+        resizeMode: 'contain'
     },
     addButton: {
         margin: 10
     },
     title: {
-        fontSize: 18,
-        fontWeight: '400'
+        fontSize: 13,
+        fontWeight: '500'
     },
     description: {
         fontSize: 13,

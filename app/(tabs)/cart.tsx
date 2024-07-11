@@ -9,7 +9,7 @@ const CartScreen = () => {
 
   interface ShopItem {
       image: string,
-      name: string,
+      title: string,
       description: string,
       price: number,
       id: number
@@ -24,6 +24,7 @@ const CartScreen = () => {
     }, [])
   );
 
+  console.log("cart");
 
   console.log(cart);
   
@@ -66,9 +67,9 @@ const CartScreen = () => {
               data={cart}
               renderItem={({ item }) => (
                 <View style={styles.cartItem}>
-                  <Image source={require(item.image)} style={{ width: 100, height: 150 }} />
+                  <Image src={item.image} style={{ width: 100, height: 150 }} />
                   <View style={styles.cartContent}>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.name}</Text>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
                     <Text style={{fontSize: 18}}>{item.description}</Text>
                     <Text style={{color: '#dc8460', fontSize: 20}}>${item.price}</Text>
                     <TouchableOpacity onPress={() => removeFromCart(item.id)}>
@@ -115,8 +116,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 20,
-    marginBottom: 10,
+    marginBottom: 5,
     paddingVertical: 10,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 2
   },
   cartContent: {
     display: 'flex',
