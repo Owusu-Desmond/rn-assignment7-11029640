@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity } fr
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Icon } from '@/components/Icon';
 
 interface ShopItem {
   image: string;
@@ -33,10 +34,6 @@ const ProductPage = () => {
     }
   }, [id]);
 
-  const addToBasket = () => {
-    // Logic to add product to basket
-    console.log(`Added ${product?.title} to basket`);
-  };
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -56,9 +53,13 @@ const ProductPage = () => {
       </View>
 
       {/* Footer */}
-      <TouchableOpacity style={styles.footer} onPress={addToBasket}>
-        <Text style={styles.footerText}>Add to basket</Text>
-      </TouchableOpacity>
+      <View style={styles.footer}>
+        <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', gap: 20}}>
+          <Icon name='add' size={28} color='#fff' />
+          <Text style={styles.footerText}>Add to basket</Text>
+        </TouchableOpacity>
+        <Image source={require('@/assets/favourite.png')} style={{width: 50, height: 50}} />
+      </View>
     </SafeAreaView>
   );
 };
@@ -88,11 +89,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   footer: {
+    display: 'flex',
+    flexDirection: 'row',
     backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     height: 60,
     width: '100%',
+    padding: 20,
   },
   footerText: {
     color: 'white',
