@@ -2,7 +2,7 @@ import { Icon } from "@/components/Icon";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
-import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
+import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const CartScreen = () => {
@@ -19,15 +19,9 @@ const CartScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      console.log('Hello, I am focused!');
       fetchCart();
     }, [])
   );
-
-  console.log("cart");
-
-  console.log(cart);
-  
 
   const fetchCart = async () => {
     try {
@@ -61,38 +55,44 @@ const CartScreen = () => {
               <View style={{ gap: 30}}>
                 <Image source={require('@/assets/Search.png')} />
               </View> 
-              </View>
-              <Text style={{fontSize: 25, textAlign: 'center', paddingVertical: 20}}>Checkout</Text>
-            <FlatList
-              data={cart}
-              renderItem={({ item }) => (
-                <View style={styles.cartItem}>
-                  <Image src={item.image} style={{ width: 100, height: 150 }} />
-                  <View style={styles.cartContent}>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
-                    <Text style={{fontSize: 18}}>{item.description}</Text>
-                    <Text style={{color: '#dc8460', fontSize: 20}}>${item.price}</Text>
-                    <TouchableOpacity onPress={() => removeFromCart(item.id)}>
-                      <Image style={styles.removeButton} source={require('../../assets/remove.png')} />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-              keyExtractor={item => item.id.toString()}
-            />
-
-            <View style={styles.cartTotal}>
-              <Text style={{fontSize: 20}}>EST. TOTAL</Text>
-              <Text style={{fontSize: 25, color: '#dc8460'}}>
-                ${cart.reduce(((prev: number, item: ShopItem) => {
-                  return item.price + prev
-                }), 0)}
-              </Text>
             </View>
-        </View>
-        <View style={styles.checkoutContainer}>
-          <Icon size={28} name="gift" color='white' />
-          <Text style={{color: '#FFF', fontSize: 25}}>CHECKOUT</Text>
+
+              <Image source={require('@/assets/checkout.png')}/>
+            <View style={{flex: 1, justifyContent: 'space-between'}}>
+              <FlatList
+                data={cart}
+                renderItem={({ item }) => (
+                  <View style={styles.cartItem}>
+                    <View>
+                      <ImageBackground src={item.image} style={{ width: 50, height: 70 }} resizeMode="contain" />
+                      </View>
+                    <View style={styles.cartContent}>
+                      <Text style={{ fontSize: 16, fontWeight: '300'}}>{item.title}</Text>
+                      <Text style={{color: '#dc8460', fontSize: 16}}>${item.price}</Text>
+                      <TouchableOpacity onPress={() => removeFromCart(item.id)}>
+                        <Image style={styles.removeButton} source={require('../../assets/remove.png')} />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                )}
+                keyExtractor={item => item.id.toString()}
+              />
+              <View style={styles.footer}>
+                <View style={styles.cartTotal}>
+                  <Text style={{fontSize: 20}}>EST. TOTAL</Text>
+                  <Text style={{fontSize: 25, color: '#dc8460'}}>
+                    ${cart.reduce(((prev: number, item: ShopItem) => {
+                      return item.price + prev
+                    }), 0)}
+                  </Text>
+                </View>
+                <View style={styles.checkoutContainer}>
+                  <Icon size={28} name="gift" color='white' />
+                  <Text style={{color: '#FFF', fontSize: 25}}>CHECKOUT</Text>
+                </View>
+              </View>
+            </View>
+
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -110,20 +110,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20
+    padding: 20,
   },
   cartItem: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
-    marginBottom: 5,
-    paddingVertical: 10,
+    gap: 10,
     borderBottomColor: 'gray',
-    borderBottomWidth: 2
+    borderBottomWidth: 1
   },
   cartContent: {
     display: 'flex',
-    gap: 7
+    width: 300,
+    gap: 5,
+    paddingVertical: 10,
   },
   removeButton: {
     display: 'flex',
@@ -143,6 +144,17 @@ const styles = StyleSheet.create({
     gap: 20,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderColor: '#ccc',
   }
 });
 

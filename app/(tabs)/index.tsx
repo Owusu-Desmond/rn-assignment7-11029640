@@ -1,10 +1,11 @@
 import ShoppingCard from "@/components/ShoppingCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
-import { FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useCallback, useState } from "react";
+import { FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
+import SideNav from "@/components/sideNav";
 
 export default function Index() {
 
@@ -18,6 +19,7 @@ export default function Index() {
 
   const [shop, setShop] = useState<ShopItem[]>([]);
   const [cart, setCart] = useState<ShopItem[]>([]);
+  const [showSideNav, setShowSideNav] = useState<boolean>(false)
 
   useFocusEffect(
     useCallback(() => {
@@ -70,11 +72,15 @@ export default function Index() {
 
   return (
     <SafeAreaView>
-      {/* <ScrollView> */}
+      <ScrollView>
+      {/* side Nav */}
+      <SideNav visible={showSideNav} onClose={() => setShowSideNav(false)} />
         <View style={{backgroundColor: '#fff', paddingHorizontal: 20, paddingBottom: 100}}>
           {/* nav section */}
           <View style={styles.nav}>
-            <Image source={require('@/assets/Menu.png')} />
+            <TouchableOpacity onPress={() => setShowSideNav(true)}>
+              <Image source={require('@/assets/Menu.png')} />
+            </TouchableOpacity>
             <Image source={require('@/assets/Logo.png')} />
             <View style={[styles.iconsFlex, { gap: 30}]}>
               <Image source={require('@/assets/Search.png')} />
@@ -84,7 +90,6 @@ export default function Index() {
 
           {/* header section */}
           <FlatList
-            contentContainerStyle={styles.lists}
             data={shop}
             numColumns={2}
             columnWrapperStyle={{justifyContent: 'space-between'}}
@@ -101,7 +106,7 @@ export default function Index() {
             keyExtractor={item => item["id"].toString()}
           />
         </View>
-      {/* </ScrollView> */}
+      </ScrollView>
     </SafeAreaView>
 
   );
@@ -136,9 +141,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  lists: {
-    // display: 'flex',
-    // gap: 10,
   }
 })

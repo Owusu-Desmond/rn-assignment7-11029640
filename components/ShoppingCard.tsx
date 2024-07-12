@@ -21,7 +21,7 @@ type ShoppingCardProps = {
                     onPress={onPress}
                     disabled={inCart}
                 >
-                    <Icon color={inCart ? 'green' : 'black'} name={inCart ? 'checkmark-circle-outline' : 'add-circle-outline'} size={28} />
+                    <Icon color={inCart ? 'green' : '#dc8460'} name={inCart ? 'checkmark-circle-outline' : 'add-circle-outline'} size={28} />
                 </TouchableOpacity>
             </ImageBackground>
             <View style={{width: 155}}>
