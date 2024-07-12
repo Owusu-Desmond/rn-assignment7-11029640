@@ -44,11 +44,7 @@ export default function Index() {
 
   const fetchShop = async () => {
     try {
-      
-      await AsyncStorage.removeItem('shop')
-      await AsyncStorage.removeItem('cart')
       const response = await axios.get('https://fakestoreapi.com/products');
-      console.log(JSON.stringify(response.data));
       
       if (response.data !== null) {        
         setShop(response.data);
@@ -59,19 +55,18 @@ export default function Index() {
   }
 
   const addToCart = async (item: ShopItem) => {
-    console.log('adding');
     const updatedCart = [...cart, item];
     setCart(updatedCart);
     
     try {
       await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));
     } catch (err: any) {
-      console.error('Error removing from cart:', err.message);
+      console.error('Error adding from cart:', err.message);
     }
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView edges={['right', 'left', 'top']}>
       <ScrollView>
       {/* side Nav */}
       <SideNav visible={showSideNav} onClose={() => setShowSideNav(false)} />
@@ -101,6 +96,7 @@ export default function Index() {
                 price={item["price"]}
                 onPress={() => addToCart(item)}
                 inCart={cart.some(cartItem => cartItem.id === item["id"])}
+                id={item['id']}
               />
             )}
             keyExtractor={item => item["id"].toString()}
