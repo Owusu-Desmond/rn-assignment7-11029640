@@ -1,50 +1,87 @@
-# Welcome to your Expo app 👋
+<a name="readme-top"></a>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<div align="center">
+  <!-- Replace this logo with your own or remove it if not applicable -->
+  <img src="open_fashion_logo.png" alt="logo" width="140"  height="auto" />
+  <br/>
 
-## Get started
+  <h3><b>Open Fashion README</b></h3>
 
-1. Install dependencies
+</div>
 
-   ```bash
-   npm install
-   ```
+<!-- TABLE OF CONTENTS -->
 
-2. Start the app
+# 📗 Table of Contents
 
-   ```bash
-    npx expo start
-   ```
+- [📖 About the Project](#about-project)
+  - [🛠 Built With](#built-with)
+    - [Tech Stack](#tech-stack)
+    - [Key Features](#key-features)
+  - [🚀 Live Demo](#live-demo)
+- [💻 Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
 
-In the output, you'll find options to open the app in a
+<!-- ABOUT THE PROJECT -->
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+# 📖 Open Fashion <a name="about-project"></a>
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+> Open Fashion is an application that allows users to explore and shop for fashion items from an external API.
 
-## Get a fresh project
+## 🛠 Built With <a name="built-with"></a>
 
-When you're ready, run:
+### Tech Stack <a name="tech-stack"></a>
 
-```bash
-npm run reset-project
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://reactnative.dev/">React Native</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary>API</summary>
+  <ul>
+    <li><a href="https://fakestoreapi.com/">Fake Store API</a></li>
+  </ul>
+</details>
+
+<!-- Features -->
+
+### Key Features <a name="key-features"></a>
+
+- **HomeScreen**: Displays a list of available products fetched from Fake Store API.
+- **ProductDetailScreen**: Shows detailed information about a selected product.
+- **CartScreen**: Displays selected items in the cart with options to remove items.
+- **Drawer Component/Navigation Menu**: Provides navigation options accessible through swipe gesture or button.
+- **Add to Cart and Remove from Cart Buttons**: Functionality to manage items in the cart.
+- **Fetch Data from External API**: Utilizes fetch or axios for fetching product data.
+- **Manage Asynchronous Operations**: Uses async/await or promises for handling asynchronous tasks.
+- **Local Storage**: Implements AsyncStorage, SecureStore, or FileSystem to store selected items locally on the device.
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+In order to run this project, you need:
+
+- A development environment set up for React Native.
+- Node.js installed.
+- Expo CLI installed.
+
+### Setup
+
+Clone this repository to your desired folder:
+
+```sh
+cd your-folder
+git clone https://github.com/Owusu-Desmond/rn-assignment7-11029640.git
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
