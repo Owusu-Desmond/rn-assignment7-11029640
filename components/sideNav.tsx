@@ -16,10 +16,16 @@ const SideNav: React.FC<SideNavProps> = ({ visible, onClose }) => {
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
             <Icon name='close' color='red' />
         </TouchableOpacity>
-        <Text style={styles.navItem}>Home</Text>
-        <Text style={styles.navItem}>Shop</Text>
-        <Text style={styles.navItem}>Cart</Text>
-        <Text style={styles.navItem}>Profile</Text>
+        <View>
+          <Text style={{ fontSize: 20}}>Owusu Desmond</Text>
+          <View style={{ borderWidth: 1, borderColor: '#dc8460', width: 140, marginTop: 10, marginLeft: 10}}/>
+        </View>
+        <Text style={styles.navItem}>Store</Text>
+        <Text style={styles.navItem}>Locations</Text>
+        <Text style={styles.navItem}>Blog</Text>
+        <Text style={styles.navItem}>Jewelery</Text>
+        <Text style={styles.navItem}>Electronic</Text>
+        <Text style={styles.navItem}>Clothing</Text>
       </View>
     </View>
   );
@@ -28,7 +34,7 @@ const SideNav: React.FC<SideNavProps> = ({ visible, onClose }) => {
 const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',
-    top: 45,
+    top: 0,
     bottom: 0,
     left: 0,
     right: 0,
@@ -37,6 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   sideNav: {
+    display: 'flex',
+    gap: 30,
     width: 250,
     backgroundColor: '#fff',
     height: '100%',
@@ -44,11 +52,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   closeButton: {
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-start',
   },
   navItem: {
     marginVertical: 10,
-    fontSize: 16,
+    fontSize: 18,
   },
 });
 
