@@ -85,3 +85,11 @@ Clone this repository to your desired folder:
 cd your-folder
 git clone https://github.com/Owusu-Desmond/rn-assignment7-11029640.git
 ```
+## App preview
+  ![IMG_2355](https://github.com/user-attachments/assets/cbe95127-ad79-4735-9084-1533eb3da0de)
+  ![IMG_2357](https://github.com/user-attachments/assets/f6a35f92-3058-41d9-a267-38e2748b126f)
+  
+  ![IMG_2354](https://github.com/user-attachments/assets/27f6687a-eaa6-427e-9c17-eabf40ad6f41)
+  ![IMG_2356](https://github.com/user-attachments/assets/af52fdcb-9f30-445f-a1d9-d30cabdc5e97)
+
+
